@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-//app.use(express.json())
+app.use(express.json())
 
 let persons = [
   {
@@ -51,6 +51,21 @@ app.delete('/api/persons/:id', (request, response) => {
 
   response.status(204).end()
 })
+
+const generateId = () => {
+  const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+  return getRandomInt(1, 100000)
+}
+
+app.post('/api/persons', (request, response) => {
+  const person = request.body
+  person.id = generateId()
+
+  persons = persons.concat(person)
+
+  response.json(person)
+})
+
 
 const PORT = 3001
 app.listen(PORT, () => {
