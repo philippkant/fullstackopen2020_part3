@@ -9,3 +9,12 @@ content-type: application/json
     "name": "Thomas Müller",
     "number": "643-11336-12"
 }
+
+###
+
+POST http://localhost:3001/api/persons/ HTTP/1.1
+content-type: application/json
+
+{
+    "number": "643-11336-12"
+}
