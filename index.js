@@ -14,29 +14,6 @@ app.use(express.static('build'))
 morgan.token('data', function (req, res) { return JSON.stringify(req.body) })
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data' ))
 
-let persons = [
-  {
-    id: 1,
-    name: "Arto Hellas",
-    number: "040-123456"
-  },
-  {
-    id: 2,
-    name: "Ada Lovelace",
-    number: "39-44-5323523"
-  },
-  {
-    id: 3,
-    name: "Dan Abramov",
-    number: "12-43-234345"
-  },
-  {
-    id: 4,
-    name: "Mary Poppendick",
-    number: "39-23-6423122"
-  },
-]
-
 app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
     response.json(persons)
@@ -59,7 +36,7 @@ app.get('/api/persons/:id', (request, response, next) => {
       response.status(404).end()
     }
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
@@ -70,10 +47,10 @@ app.delete('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-const generateId = () => {
-  const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
-  return getRandomInt(1, 100000)
-}
+// const generateId = () => {
+//   const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+//   return getRandomInt(1, 100000)
+// }
 
 app.post('/api/persons', (request, response, next) => {
   const body = request.body
@@ -93,8 +70,8 @@ app.post('/api/persons', (request, response, next) => {
   person.save().then(savedPerson => {
     response.json(savedPerson)
   })
-  .catch(error => next(error)
-  )
+    .catch(error => next(error)
+    )
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
