@@ -44,7 +44,10 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-  response.send(`Phonebook has info for ${persons.length} people<p>${new Date()}</p>`)
+  Person.find({}).then(persons => {
+    console.log(persons)
+    response.send(`Phonebook has info for ${persons.length} people<p>${new Date()}</p>`)
+  })
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
